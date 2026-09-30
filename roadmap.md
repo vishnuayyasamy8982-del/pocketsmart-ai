@@ -2,3 +2,4 @@
 - [ ] Build responsive shell, dashboard, transactions, analytics, and PocketBrain threaded chat.
 - [ ] Build My Pocket live customization and preferences.
 - [ ] Verify interactions and responsive presentation.
+- [ ] Replace demo-only authentication and mock PocketBrain responses with real services as requested; connect persistent finance data where possible.
