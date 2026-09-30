@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as MyPocketRouteImport } from './routes/my-pocket'
 import { Route as PocketbrainRouteImport } from './routes/pocketbrain'
@@ -27,11 +26,6 @@ const IndexRoute = IndexRouteImport.update({
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -68,7 +62,6 @@ const PocketbrainThreadIdRoute = PocketbrainThreadIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
-  '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/my-pocket': typeof MyPocketRoute
   '/pocketbrain': typeof PocketbrainRouteWithChildren
@@ -79,7 +72,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
-  '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/my-pocket': typeof MyPocketRoute
   '/pocketbrain': typeof PocketbrainRouteWithChildren
@@ -91,7 +83,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
-  '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/my-pocket': typeof MyPocketRoute
   '/pocketbrain': typeof PocketbrainRouteWithChildren
@@ -104,7 +95,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/analytics'
-    | '/auth'
     | '/dashboard'
     | '/my-pocket'
     | '/pocketbrain'
@@ -115,7 +105,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/analytics'
-    | '/auth'
     | '/dashboard'
     | '/my-pocket'
     | '/pocketbrain'
@@ -126,7 +115,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/analytics'
-    | '/auth'
     | '/dashboard'
     | '/my-pocket'
     | '/pocketbrain'
@@ -138,7 +126,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalyticsRoute: typeof AnalyticsRoute
-  AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   MyPocketRoute: typeof MyPocketRoute
   PocketbrainRoute: typeof PocketbrainRouteWithChildren
@@ -160,13 +147,6 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/analytics'
       preLoaderRoute: typeof AnalyticsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -229,7 +209,6 @@ const PocketbrainRouteWithChildren = PocketbrainRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalyticsRoute: AnalyticsRoute,
-  AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   MyPocketRoute: MyPocketRoute,
   PocketbrainRoute: PocketbrainRouteWithChildren,
