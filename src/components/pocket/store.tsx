@@ -1,3 +1,4 @@
+import type React from 'react';
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { defaultPreferences, type Preferences, type Transaction, type Thread } from '@/lib/finance';
@@ -5,7 +6,9 @@ import type { Json } from '@/integrations/supabase/types';
 import { toast } from 'sonner';
 type Account = { id:string; name:string; email:string };
 type Store = { ready:boolean; account:Account|null; transactions:Transaction[]; preferences:Preferences; goal:number; threads:Thread[]; signIn:(email:string,password:string)=>Promise<void>; signUp:(name:string,email:string,password:string)=>Promise<boolean>; signOut:()=>Promise<void>; signInGoogle:()=>Promise<void>; saveTransaction:(item:Transaction)=>Promise<void>; deleteTransaction:(id:string)=>Promise<void>; setPreferences:(value:Preferences)=>void; setGoal:(value:number)=>void; createThread:()=>string; saveThread:(thread:Thread)=>void; deleteThread:(id:string)=>void };
-const Ctx=createContext<Store|null>(null);
+// Keep one context instance across hot reloads so provider and consumers always match.
+const ctxHost=globalThis as unknown as {__pocketCtx?:React.Context<Store|null>};
+const Ctx=ctxHost.__pocketCtx ??= createContext<Store|null>(null);
 const threadKey=(id:string)=>`ps-threads-${id}`;
 function loadThreads(id:string):Thread[]{try{return JSON.parse(localStorage.getItem(threadKey(id))||'[]')}catch{return []}}
 export function PocketProvider({children}:{children:ReactNode}) {
