@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the MVP's finance records, demo accounts, customization, and PocketBrain threads in browser localStorage because the requested first version must work without a backend or API keys; do not treat demo authentication as secure access control.
+- Keep each PocketBrain conversation at its own `/pocketbrain/$threadId` URL with browser-local history so reloading a thread restores its messages.

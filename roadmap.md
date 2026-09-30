@@ -1,0 +1,4 @@
+- [ ] Build browser-based demo authentication and finance data state.
+- [ ] Build responsive shell, dashboard, transactions, analytics, and PocketBrain threaded chat.
+- [ ] Build My Pocket live customization and preferences.
+- [ ] Verify interactions and responsive presentation.
