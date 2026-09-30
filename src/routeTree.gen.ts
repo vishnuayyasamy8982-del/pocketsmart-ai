@@ -10,11 +10,48 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as MyPocketRouteImport } from './routes/my-pocket'
+import { Route as PocketbrainRouteImport } from './routes/pocketbrain'
+import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as PocketbrainThreadIdRouteImport } from './routes/pocketbrain.$threadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyPocketRoute = MyPocketRouteImport.update({
+  id: '/my-pocket',
+  path: '/my-pocket',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PocketbrainRoute = PocketbrainRouteImport.update({
+  id: '/pocketbrain',
+  path: '/pocketbrain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransactionsRoute = TransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -22,30 +59,90 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PocketbrainThreadIdRoute = PocketbrainThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => PocketbrainRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/my-pocket': typeof MyPocketRoute
+  '/pocketbrain': typeof PocketbrainRouteWithChildren
+  '/transactions': typeof TransactionsRoute
   '/api/chat': typeof ApiChatRoute
+  '/pocketbrain/$threadId': typeof PocketbrainThreadIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/my-pocket': typeof MyPocketRoute
+  '/pocketbrain': typeof PocketbrainRouteWithChildren
+  '/transactions': typeof TransactionsRoute
   '/api/chat': typeof ApiChatRoute
+  '/pocketbrain/$threadId': typeof PocketbrainThreadIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/my-pocket': typeof MyPocketRoute
+  '/pocketbrain': typeof PocketbrainRouteWithChildren
+  '/transactions': typeof TransactionsRoute
   '/api/chat': typeof ApiChatRoute
+  '/pocketbrain/$threadId': typeof PocketbrainThreadIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/chat'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/dashboard'
+    | '/my-pocket'
+    | '/pocketbrain'
+    | '/transactions'
+    | '/api/chat'
+    | '/pocketbrain/$threadId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/chat'
-  id: '__root__' | '/' | '/api/chat'
+  to:
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/dashboard'
+    | '/my-pocket'
+    | '/pocketbrain'
+    | '/transactions'
+    | '/api/chat'
+    | '/pocketbrain/$threadId'
+  id:
+    | '__root__'
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/dashboard'
+    | '/my-pocket'
+    | '/pocketbrain'
+    | '/transactions'
+    | '/api/chat'
+    | '/pocketbrain/$threadId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
+  MyPocketRoute: typeof MyPocketRoute
+  PocketbrainRoute: typeof PocketbrainRouteWithChildren
+  TransactionsRoute: typeof TransactionsRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
@@ -58,6 +155,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-pocket': {
+      id: '/my-pocket'
+      path: '/my-pocket'
+      fullPath: '/my-pocket'
+      preLoaderRoute: typeof MyPocketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pocketbrain': {
+      id: '/pocketbrain'
+      path: '/pocketbrain'
+      fullPath: '/pocketbrain'
+      preLoaderRoute: typeof PocketbrainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transactions': {
+      id: '/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -65,11 +204,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pocketbrain/$threadId': {
+      id: '/pocketbrain/$threadId'
+      path: '/$threadId'
+      fullPath: '/pocketbrain/$threadId'
+      preLoaderRoute: typeof PocketbrainThreadIdRouteImport
+      parentRoute: typeof PocketbrainRoute
+    }
   }
 }
 
+interface PocketbrainRouteChildren {
+  PocketbrainThreadIdRoute: typeof PocketbrainThreadIdRoute
+}
+
+const PocketbrainRouteChildren: PocketbrainRouteChildren = {
+  PocketbrainThreadIdRoute: PocketbrainThreadIdRoute,
+}
+
+const PocketbrainRouteWithChildren = PocketbrainRoute._addFileChildren(
+  PocketbrainRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
+  MyPocketRoute: MyPocketRoute,
+  PocketbrainRoute: PocketbrainRouteWithChildren,
+  TransactionsRoute: TransactionsRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
