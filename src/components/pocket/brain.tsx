@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { Link, useNavigate } from '@tanstack/react-router';
@@ -12,7 +12,7 @@ import { Shimmer } from '@/components/ai-elements/shimmer';
 import { usePocket } from './store';
 import { money, totals } from '@/lib/finance';
 const suggestions=['How am I doing this month?','What should I cut back on?','Can I afford a new phone?','How much can I save this month?','Where am I spending the most?'];
-export function BrainHome(){const {threads,createThread}=usePocket();const navigate=useNavigate();useEffect(()=>{const first=threads[0]?.id;if(first)navigate({to:'/pocketbrain/$threadId',params:{threadId:first},replace:true});else{const id=createThread();navigate({to:'/pocketbrain/$threadId',params:{threadId:id},replace:true})}},[]);return <div className="py-20 text-center text-muted-foreground">Opening PocketBrain…</div>}
+export function BrainHome(){const {threads,createThread,ready,account}=usePocket();const navigate=useNavigate();const started=useRef(false);useEffect(()=>{if(!ready||!account||started.current)return;started.current=true;const id=threads[0]?.id??createThread();navigate({to:'/pocketbrain/$threadId',params:{threadId:id},replace:true})},[ready,account,threads,createThread,navigate]);return <div className="py-20 text-center text-muted-foreground">Opening PocketBrain…</div>}
 export function Brain({threadId}:{threadId:string}){const {threads,createThread,deleteThread,saveThread,transactions,preferences,account}=usePocket();const navigate=useNavigate();const thread=threads.find(x=>x.id===threadId);const [showThreads,setShowThreads]=useState(true);const [input,setInput]=useState('');const transport=useMemo(()=>new DefaultChatTransport({api:'/api/chat',headers:async()=>{const {supabase}=await import('@/integrations/supabase/client');const {data:{session}}=await supabase.auth.getSession();return session?{Authorization:`Bearer ${session.access_token}`}:{}}}),[]);
  const {messages,sendMessage,status,stop,error}=useChat({id:threadId,messages:(thread?.messages??[]) as UIMessage[],transport,onFinish:({messages:finished})=>{const current=threads.find(x=>x.id===threadId);if(current)saveThread({...current,messages:finished as typeof current.messages,title:current.title==='New conversation'?finished.find(x=>x.role==='user')?.parts.filter(p=>p.type==='text').map(p=>p.text).join(' ').slice(0,38)||current.title:current.title,updatedAt:Date.now()})},onError:(err)=>toast.error(err.message||'PocketBrain could not respond')});
  useEffect(()=>{if(error)toast.error(error.message)},[error]);const {income,expense}=totals(transactions);const busy=status==='streaming'||status==='submitted';const ask=(text:string)=>{if(!busy&&text.trim()){sendMessage({text:text.trim()});setInput('')}};
