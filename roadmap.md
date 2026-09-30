@@ -1,5 +1,4 @@
-- [ ] Build browser-based demo authentication and finance data state.
-- [ ] Build responsive shell, dashboard, transactions, analytics, and PocketBrain threaded chat.
-- [ ] Build My Pocket live customization and preferences.
-- [ ] Verify interactions and responsive presentation.
-- [ ] Replace demo-only authentication and mock PocketBrain responses with real services as requested; connect persistent finance data where possible.
+- [x] Build responsive finance screens, working transaction controls, real account sign-in and saved preferences.
+- [x] Replace sample financial figures with account-derived totals, trends and empty states.
+- [x] Connect PocketBrain to live AI with separate browser-local conversations per account.
+- [ ] Verify authenticated account workflows and a live PocketBrain answer; requires a confirmed account session.
