@@ -1,0 +1,4 @@
+- [x] Build responsive finance screens, working transaction controls, real account sign-in and saved preferences.
+- [x] Replace sample financial figures with account-derived totals, trends and empty states.
+- [x] Connect PocketBrain to live AI with separate browser-local conversations per account.
+- [ ] Verify authenticated account workflows and a live PocketBrain answer; requires a confirmed account session.
