@@ -1,13 +1,3 @@
-<!-- LOVABLE:BEGIN -->
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-<!-- LOVABLE:END -->
-
-- Keep the MVP's finance records, demo accounts, customization, and PocketBrain threads in browser localStorage because the requested first version must work without a backend or API keys; do not treat demo authentication as secure access control.
-- Keep each PocketBrain conversation at its own `/pocketbrain/$threadId` URL with browser-local history so reloading a thread restores its messages.
+- Keep finance records and settings in Lovable Cloud with user-scoped row policies; this prevents accounts sharing private data.
+- Keep PocketBrain conversations local per authenticated account while streaming real AI on the server; this preserves thread history without exposing credentials.
+- Use TanStack Start routes and a shared PocketProvider for the application shell; this keeps navigation and account state coherent.
